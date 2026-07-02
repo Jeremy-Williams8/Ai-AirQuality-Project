@@ -2,92 +2,110 @@
 
 
 
-## Getting started
+# AI Air Quality Project - Health Risk Predictor
+## Overview
+This project implements a machine learning model to predict health risk scores based on air quality and environmental parameters. Using a Random Forest Regressor, the system analyzes nine key environmental features to estimate a health risk score, providing valuable insights for public health monitoring and environmental assessment.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Features
+Data Processing: Automatic handling of missing values using mean imputation
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Machine Learning Model: Random Forest Regressor with 100 decision trees
 
-## Add your files
+Evaluation Metrics: Mean Absolute Error (MAE) and R-squared (R²) score
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+Feature Set: 9 environmental parameters including PM2.5, NO2, CO2, humidity, temperature, pressure, wind gust, visibility, and UV index
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/wgu-gitlab-environment/student-repos/jwill669/ai-airquality-project-jwilld682.git
-git branch -M main
-git push -uf origin main
-```
+# Features Used
+Feature	Description
+pm2.5	Particulate matter 2.5 concentration
+no2	Nitrogen dioxide levels
+co2	Carbon dioxide concentration
+humidity	Relative humidity percentage
+temp	Temperature reading
+pressure	Atmospheric pressure
+windgust	Wind gust speed
+visibility	Visibility distance
+uvindex	UV radiation index
+Installation
+Prerequisites
+Python 3.7 or higher
 
-## Integrate with your tools
+pip package manager
 
-* [Set up project integrations](https://gitlab.com/wgu-gitlab-environment/student-repos/jwill669/ai-airquality-project-jwilld682/-/settings/integrations)
+# Required Packages
+bash
+pip install pandas scikit-learn openpyxl
+# Usage
+Ensure your dataset is in Excel format named DQN1 Dataset.xlsx with a sheet named 'Data'
 
-## Collaborate with your team
+The dataset should contain the feature columns listed above and a 'healthRiskScore' column
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+Run the script:
 
-## Test and Deploy
+bash
+python predict_health_risk.py
+# Expected Output
+The script will output the model's performance metrics:
 
-Use the built-in continuous integration in GitLab.
+Mean Absolute Error (MAE): Average prediction error in health risk score units
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+R-squared (R²): Coefficient of determination indicating model fit (0-1, closer to 1 is better)
 
-***
+# Data Requirements
+The Excel file must contain all feature columns and the target column
 
-# Editing this README
+Columns are case-sensitive (use exact names as listed in features table)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+The script automatically handles missing values by using column means
 
-## Suggestions for a good README
+# Model Training
+Training/Testing Split: 80/20 ratio
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Random State: 42 (for reproducibility)
 
-## Name
-Choose a self-explaining name for your project.
+Number of Trees: 100
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Algorithm: Random Forest Regression
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+# Performance Metrics
+The model uses two primary evaluation metrics:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+MAE: Measures average absolute difference between predicted and actual values
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+R² Score: Indicates the proportion of variance in the dependent variable that's predictable from the independent variables
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+# Project Structure
+text
+ai-airquality-project/
+├── predict_health_risk.py    # Main script
+├── DQN1 Dataset.xlsx         # Dataset file (required)
+├── README.md                 # Project documentation
+└── requirements.txt          # Dependencies (optional)
+# Future Improvements
+Hyperparameter tuning for optimized model performance
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Cross-validation implementation
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Feature importance analysis
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Visualization of predictions vs actual values
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Support for multiple data formats (CSV, JSON)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+API endpoint integration for real-time predictions
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-For open source projects, say how it is licensed.
+License
+This project is part of the WGU GitLab environment for student repositories.
+
+Author
+JWillD682 - WGU Student Repository
+
+Support
+For questions or issues, please refer to the project's GitLab repository or contact the course instructor.
+
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
