@@ -1,6 +1,3 @@
-# Ai-AirQuality-Project-JwillD682
-
-
 
 # AI Air Quality Project - Health Risk Predictor
 ## Overview
